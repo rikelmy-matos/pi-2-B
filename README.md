@@ -87,7 +87,8 @@ O sistema utiliza H2 em memória com dados de exemplo pré-carregados.
 - [Requisitos do Sistema](docs/Requisitos.md)
 - [Documentação do Backend](docs/Server.md)
 - [Documentação do Frontend](docs/Cliente_Flask.md)
-- [Roteiro de Apresentação](docs/Roteiro_Apresentacao.md)
+- [Arquitetura do Sistema](docs/Arquitetura.md)
+- [Guia de Desenvolvimento](docs/Desenvolvimento.md)
 
 ## 🤝 Contribuição
 
