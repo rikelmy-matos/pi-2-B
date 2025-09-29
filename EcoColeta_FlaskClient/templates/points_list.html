@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="h3 text-eco">
+    <i class="bi bi-geo-alt me-2"></i>Pontos de Coleta
+  </h1>
+  <a class="btn btn-success" href="{{ url_for('point_new') }}">
+    <i class="bi bi-plus-circle me-2"></i>Novo Ponto
+  </a>
+</div>
+
+<div class="card mb-4">
+  <div class="card-header bg-light">
+    <h6 class="mb-0"><i class="bi bi-funnel me-2"></i>Filtros</h6>
+  </div>
+  <div class="card-body">
+    <form class="row g-3">
+      <div class="col-md-3">
+        <label class="form-label">Tipo de Resíduo</label>
+        <select name="type" class="form-select">
+          <option value="">Todos os tipos</option>
+          {% for t in types %}
+            <option value="{{ t }}" {% if filters.type == t %}selected{% endif %}>{{ t }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">Latitude</label>
+        <input type="text" class="form-control" name="lat" value="{{ filters.lat }}" placeholder="-23.5505">
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">Longitude</label>
+        <input type="text" class="form-control" name="lng" value="{{ filters.lng }}" placeholder="-46.6333">
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">Raio (Km)</label>
+        <input type="number" class="form-control" name="radiusKm" value="{{ filters.radiusKm }}" placeholder="10">
+      </div>
+      <div class="col-md-3 d-flex align-items-end gap-2">
+        <button class="btn btn-success" type="submit">
+          <i class="bi bi-search me-1"></i>Filtrar
+        </button>
+        <a class="btn btn-outline-secondary" href="{{ url_for('points') }}">
+          <i class="bi bi-x-circle me-1"></i>Limpar
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% if points %}
+  <div class="row g-3">
+    {% for p in points %}
+    <div class="col-md-6 col-lg-4">
+      <div class="card point-card h-100">
+        <div class="card-body">
+          <h5 class="card-title text-eco">{{ p.name }}</h5>
+          <p class="card-text text-muted mb-2">
+            <i class="bi bi-geo-alt me-1"></i>{{ p.address }}
+          </p>
+          {% if p.phone %}
+          <p class="card-text text-muted mb-2">
+            <i class="bi bi-telephone me-1"></i>{{ p.phone }}
+          </p>
+          {% endif %}
+          {% if p.hours %}
+          <p class="card-text text-muted mb-3">
+            <i class="bi bi-clock me-1"></i>{{ p.hours }}
+          </p>
+          {% endif %}
+          <div class="mb-3">
+            {% for t in p.acceptedTypes %}
+              <span class="badge bg-success-subtle text-success-emphasis border border-success-subtle me-1 mb-1">
+                {{ t }}
+              </span>
+            {% endfor %}
+          </div>
+          <div class="d-flex gap-2">
+            <a class="btn btn-sm btn-outline-primary" href="{{ url_for('point_detail', pid=p.id) }}">
+              <i class="bi bi-eye me-1"></i>Ver
+            </a>
+            <a class="btn btn-sm btn-outline-warning" href="{{ url_for('point_edit', pid=p.id) }}">
+              <i class="bi bi-pencil me-1"></i>Editar
+            </a>
+            <form method="post" action="{{ url_for('point_delete', pid=p.id) }}" class="d-inline" onsubmit="return confirm('Remover este ponto?');">
+              <button class="btn btn-sm btn-outline-danger">
+                <i class="bi bi-trash me-1"></i>Remover
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="card">
+    <div class="card-body text-center py-5">
+      <i class="bi bi-geo-alt icon-lg text-muted mb-3 d-block"></i>
+      <h5 class="text-muted">Nenhum ponto encontrado</h5>
+      <p class="text-muted">Tente ajustar os filtros ou cadastre um novo ponto</p>
+      <a href="{{ url_for('point_new') }}" class="btn btn-success">
+        <i class="bi bi-plus-circle me-2"></i>Cadastrar Primeiro Ponto
+      </a>
+    </div>
+  </div>
+{% endif %}
+{% endblock %}

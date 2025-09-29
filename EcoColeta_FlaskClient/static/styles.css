@@ -1,0 +1,99 @@
+:root {
+  --eco-primary: #28a745;
+  --eco-secondary: #20c997;
+  --eco-accent: #17a2b8;
+  --eco-dark: #155724;
+}
+
+body {
+  font-feature-settings: 'liga' 1;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  letter-spacing: -0.5px;
+}
+
+.card {
+  border: none;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+
+.badge {
+  font-weight: 500;
+  padding: 0.5em 0.8em;
+}
+
+.btn {
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.btn-success {
+  background: var(--eco-primary);
+  border-color: var(--eco-primary);
+}
+
+.btn-success:hover {
+  background: var(--eco-dark);
+  border-color: var(--eco-dark);
+  transform: translateY(-1px);
+}
+
+.form-control, .form-select {
+  border-radius: 8px;
+  border: 2px solid #e9ecef;
+  transition: border-color 0.2s;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--eco-primary);
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--eco-primary) 0%, var(--eco-secondary) 100%);
+  color: white;
+  border-radius: 15px;
+  padding: 3rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.point-card {
+  border-left: 4px solid var(--eco-primary);
+}
+
+.stats-card {
+  background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+}
+
+.icon-lg {
+  font-size: 2rem;
+  color: var(--eco-primary);
+}
+
+.text-eco {
+  color: var(--eco-primary) !important;
+}
+
+.bg-eco {
+  background-color: var(--eco-primary) !important;
+}
+
+.alert {
+  border: none;
+  border-radius: 10px;
+}
+
+footer {
+  background: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+}

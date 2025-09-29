@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="bg-white p-4 rounded-3 shadow-sm">
+  <h1 class="h5 mb-3">{{ 'Novo' if action=='create' else ('Editar #' ~ pid) }} Ponto</h1>
+  <form method="post" class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label">Nome</label>
+      <input name="name" class="form-control" value="{{ data.name or '' }}" required>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Endereço</label>
+      <input name="address" class="form-control" value="{{ data.address or '' }}" required>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">Latitude</label>
+      <input name="latitude" class="form-control" value="{{ data.latitude or '' }}" required>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">Longitude</label>
+      <input name="longitude" class="form-control" value="{{ data.longitude or '' }}" required>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Tipos aceitos</label>
+      <div class="d-flex flex-wrap gap-2">
+        {% for t in types %}
+          {% set checked = (data.acceptedTypes and (t in data.acceptedTypes)) %}
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="acceptedTypes" value="{{ t }}" id="t_{{ t }}" {% if checked %}checked{% endif %}>
+            <label class="form-check-label" for="t_{{ t }}">{{ t }}</label>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Horário</label>
+      <input name="hours" class="form-control" value="{{ data.hours or '' }}">
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Telefone</label>
+      <input name="phone" class="form-control" value="{{ data.phone or '' }}">
+    </div>
+    <div class="col-12 d-flex gap-2">
+      <button class="btn btn-success" type="submit">{{ 'Criar' if action=='create' else 'Salvar' }}</button>
+      <a class="btn btn-secondary" href="{{ url_for('points') }}">Cancelar</a>
+    </div>
+  </form>
+</div>
+{% endblock %}
